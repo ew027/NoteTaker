@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     initializeResize();
 
-    notesManager.render();
+    //notesManager.render();
     tagsManager.render(document.getElementById('tagTree'));
 
     document.querySelectorAll('.view-toggle button').forEach(button => {
@@ -27,7 +27,31 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleView(button.getAttribute('data-view'));
         });
     });
+
+    document.getElementById('noteList').addEventListener('click', (event) => {
+        const noteItem = event.target.closest('.note-item');
+        if (noteItem && noteItem.dataset.noteId) {
+            const noteId = parseInt(noteItem.dataset.noteId);
+            loadNoteForEditing(noteId);
+        }
+    });
 });
+
+// Add this new function to app.js
+async function loadNoteForEditing(noteId) {
+    try {
+        const response = await fetch(`/api/notes/${noteId}`);
+        if (!response.ok) {
+            throw new Error(`Error loading note: ${response.statusText}`);
+        }
+
+        const note = await response.json();
+        editor.loadNote(note);
+    } catch (error) {
+        console.error('Failed to load note:', error);
+        alert('Failed to load note for editing.');
+    }
+}
 
 function initializeKeyboardShortcuts() {
     document.addEventListener('keydown', (event) => {

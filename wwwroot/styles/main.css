@@ -263,3 +263,56 @@ body, html {
 .autocomplete-item.selected {
     background: #e5e7eb;
 }
+
+/* Add to wwwroot/styles/main.css */
+.editor {
+    flex: 1;
+    height: calc(100vh - 48px); /* Subtract toolbar height */
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Add this to make it a positioning context */
+}
+
+.editor-actions {
+    display: flex;
+    gap: 8px;
+    padding: 16px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    position: absolute; /* Change from fixed to absolute */
+    bottom: 0;
+    right: 0;
+    left: 0; /* Add this to span the width of the editor */
+    z-index: 100;
+    justify-content: flex-end;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.action-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #e5e7eb;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+    .action-button.primary {
+        background: #2563eb;
+        color: white;
+        border-color: #2563eb;
+    }
+
+        .action-button.primary:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+    .action-button.secondary {
+        background: white;
+        color: #4b5563;
+    }
+
+        .action-button.secondary:hover {
+            background: #f3f4f6;
+        }

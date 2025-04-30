@@ -9,6 +9,8 @@ export class TagInput {
         this.selectedIndex = -1;
 
         this.setupEventListeners();
+
+        this.container.__tagInput = this;
     }
 
     setupEventListeners() {

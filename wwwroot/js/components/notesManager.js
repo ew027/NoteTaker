@@ -13,7 +13,11 @@ export class NotesManager {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            this.notes = await response.json();
+
+            const data = await response.json();
+            // Handle the wrapped array format
+            this.notes = data.$values || [];
+
             this.render();
         } catch (error) {
             console.error('Error fetching notes:', error);
@@ -38,13 +42,14 @@ export class NotesManager {
         this.notes.forEach(note => {
             const noteEl = document.createElement('div');
             noteEl.className = 'note-item';
+            noteEl.dataset.noteId = note.id; // Add this line to store the note ID
             noteEl.innerHTML = `
-                <div style="font-weight: 500">${note.title}</div>
-                <div style="font-size: 0.875rem; color: #6b7280">${note.lastEdited}</div>
-                <div class="tags">
-                    ${note.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
-            `;
+        <div style="font-weight: 500">${note.title}</div>
+        <div style="font-size: 0.875rem; color: #6b7280">${note.lastEdited}</div>
+        <div class="tags">
+            ${note.tags.map(tag => `<span class="tag">${tag.name}</span>`).join('')}
+        </div>
+    `;
             this.container.appendChild(noteEl);
         });
     }
