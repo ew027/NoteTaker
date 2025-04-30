@@ -1,0 +1,265 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body, html {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.toolbar {
+    height: 48px;
+    background: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+}
+
+.view-toggle button {
+    padding: 4px 8px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-toggle button.active {
+    background: #e5e7eb;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.sidebar {
+    width: 256px;
+    min-width: 150px;
+    max-width: 500px;
+    border-right: 1px solid #e5e7eb;
+    background: #f9fafb;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.right-panel {
+    width: 256px;
+    min-width: 150px;
+    max-width: 500px;
+    border-left: 1px solid #e5e7eb;
+    background: #f9fafb;
+    padding: 16px;
+    position: relative;
+}
+
+.resize-handle {
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    cursor: col-resize;
+    background: transparent;
+    transition: background 0.2s;
+}
+
+.resize-handle:hover {
+    background: #e5e7eb;
+}
+
+.resize-handle.left {
+    right: -2px;
+}
+
+.resize-handle.right {
+    left: -2px;
+}
+
+.resize-handle.dragging {
+    background: #94a3b8;
+}
+
+/* Prevent text selection while resizing */
+.resizing {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.search {
+    padding: 16px;
+}
+
+.search input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+}
+
+.note-list, .tag-tree {
+    flex: 1;
+    overflow-y: auto;
+    display: none;
+}
+
+.note-list.active, .tag-tree.active {
+    display: block;
+}
+
+.note-item {
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+}
+
+.note-item:hover {
+    background: #f3f4f6;
+}
+
+.tag-item {
+    padding: 8px 16px 8px 24px;
+    cursor: pointer;
+}
+
+.tag-item:hover {
+    background: #f3f4f6;
+}
+
+.tag-item i {
+    margin-right: 8px;
+}
+
+.editor {
+    flex: 1;
+    height: calc(100vh - 48px); /* Subtract toolbar height */
+    display: flex;
+    flex-direction: column;
+}
+
+.CodeMirror, .CodeMirror-scroll {
+    flex: 1;
+    height: 100% !important;
+    min-height: 0 !important;
+}
+
+.editor-toolbar {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Ensure editor content doesn't overflow */
+.CodeMirror-scroll {
+    max-height: 100%;
+}
+
+.tags {
+    margin-top: 4px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    background: #e5e7eb;
+    border-radius: 4px;
+}
+
+/* Tag input container */
+.tag-input-container {
+    padding: 8px;
+    border-bottom: 1px solid #e5e7eb;
+    background: white;
+}
+
+.tag-input-wrapper {
+    position: relative;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 4px;
+    min-height: 38px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    cursor: text;
+}
+
+.tag-input-wrapper:focus-within {
+    border-color: #2563eb;
+    outline: 2px solid rgba(37, 99, 235, 0.1);
+}
+
+.tag-pill {
+    background: #e5e7eb;
+    border-radius: 16px;
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+}
+
+.tag-pill .remove {
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 12px;
+    padding: 2px;
+}
+
+.tag-pill .remove:hover {
+    color: #1f2937;
+}
+
+.tag-input {
+    border: none;
+    outline: none;
+    flex: 1;
+    min-width: 120px;
+    padding: 2px 4px;
+    font-size: 14px;
+}
+
+.autocomplete-dropdown {
+    position: absolute; /* Position the div absolutely */
+    top: 100%; /* Place it directly below the input */
+    left: 0; /* Align it with the left edge of the input */
+    width: 100%;
+    width: 100%;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    margin-top: 4px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.autocomplete-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.autocomplete-item:hover {
+    background: #f3f4f6;
+}
+
+.autocomplete-item.selected {
+    background: #e5e7eb;
+}

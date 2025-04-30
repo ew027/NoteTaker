@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/tiny-markdown-editor/dist/tiny-mde.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="toolbar">
+            <h1>Notes</h1>
+            <div class="search">
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
+        <div class="content">
+            <div class="sidebar">
+                <div class="view-toggle">
+                    <button data-view="notes" class="active">Notes</button>
+                    <button data-view="tags">Tags</button>
+                </div>
+                <div class="note-list active" id="noteList"></div>
+                <div class="tag-tree" id="tagTree"></div>
+                <div class="resize-handle left"></div>
+            </div>
+            <div class="editor">
+                <div class="tag-input-container">
+                    <div class="tag-input-wrapper" id="tagInputWrapper">
+                        <!-- Tags will be inserted here -->
+                        <input type="text" class="tag-input" id="tagInput" placeholder="Add tags...">
+                    </div>
+                </div>
+                <div id="tinymde-toolbar"></div>
+                <div id="tinymde"></div>
+            </div>
+            <div class="right-panel">
+                <div class="resize-handle right"></div>
+                <h2>Note Details</h2>
+                <div class="metadata-item">
+                    <div class="metadata-label">Created</div>
+                    <div class="metadata-value">Feb 19, 2025</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Last Modified</div>
+                    <div class="metadata-value">2 hours ago</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Word Count</div>
+                    <div class="metadata-value">342</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Tags</div>
+                    <div class="tags">
+                        <span class="tag">work</span>
+                        <span class="tag">ideas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/tiny-markdown-editor/dist/tiny-mde.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
